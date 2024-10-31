@@ -207,6 +207,12 @@ namespace
    #define ISDEFINED_10_15_1 false
    #endif
 
+   #ifdef ECANCELED
+   #define ISDEFINED_ECANCELED true
+   #else
+   #define ISDEFINED_ECANCELED false
+   #endif
+
    void checkAndStoreMacro(const std::string& macroName, bool isDefined, std::vector<std::pair<std::string, bool>>& map) {
       map.push_back({ macroName, isDefined });
    }
@@ -257,6 +263,7 @@ namespace osmacros
       checkAndStoreMacro(TOSTRING(MAC_OS_X_VERSION_10_14_4), ISDEFINED_10_14_4, macroDefs);
       checkAndStoreMacro(TOSTRING(MAC_OS_X_VERSION_10_15), ISDEFINED_10_15, macroDefs);
       checkAndStoreMacro(TOSTRING(MAC_OS_X_VERSION_10_15_1), ISDEFINED_10_15_1, macroDefs);
+      checkAndStoreMacro(TOSTRING(ECANCELED), ISDEFINED_ECANCELED, macroDefs);
 
       std::cout << "===== Macros defined? =====" << std::endl;
       auto maxLength = std::max_element(macroDefs.begin(), macroDefs.end(),
