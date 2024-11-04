@@ -286,6 +286,13 @@ namespace osmacros
       std::cout << "- " << TOSTRING(MAC_OS_X_VERSION_MIN_REQUIRED) << " : " << "(not defined)" << std::endl;
       #endif
 
+       std::cout << "===== Other checks =====" << std::endl;
+#if defined(MAC_OS_X_VERSION_10_8) && MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_8
+      std::cout << "Going down NEW code path (CTFontCopyDefaultCascadeListForLanguages)" << std::endl;
+#else
+       std::cout << "Going down OLD code path (CTFontCopyDefaultCascadeList)" << std::endl;
+#endif
+
    }
 
 }
