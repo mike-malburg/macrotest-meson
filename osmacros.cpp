@@ -213,6 +213,12 @@ namespace
    #define ISDEFINED_ECANCELED false
    #endif
 
+   #ifdef MAC_OS_X_VERSION_MIN_REQUIRED
+   #define ISDEFINED_MAC_OS_X_VERSION_MIN_REQUIRED true
+   #else
+   #define ISDEFINED_MAC_OS_X_VERSION_MIN_REQUIRED false
+   #endif
+   
    void checkAndStoreMacro(const std::string& macroName, bool isDefined, std::vector<std::pair<std::string, bool>>& map) {
       map.push_back({ macroName, isDefined });
    }
@@ -264,6 +270,7 @@ namespace osmacros
       checkAndStoreMacro(TOSTRING(MAC_OS_X_VERSION_10_15), ISDEFINED_10_15, macroDefs);
       checkAndStoreMacro(TOSTRING(MAC_OS_X_VERSION_10_15_1), ISDEFINED_10_15_1, macroDefs);
       checkAndStoreMacro(TOSTRING(ECANCELED), ISDEFINED_ECANCELED, macroDefs);
+      checkAndStoreMacro(TOSTRING(MAC_OS_X_VERSION_MIN_REQUIRED), ISDEFINED_MAC_OS_X_VERSION_MIN_REQUIRED, macroDefs);
 
       std::cout << "===== Macros defined? =====" << std::endl;
       auto maxLength = std::max_element(macroDefs.begin(), macroDefs.end(),
@@ -271,6 +278,14 @@ namespace osmacros
       for (const auto& entry : macroDefs) {
          std::cout << "- " << rightPad(entry.first, maxLength) << " : " << (entry.second ? "TRUE" : "FALSE") << std::endl;
       }
+
+      std::cout << "===== Macros defs =====" << std::endl;
+      #ifdef MAC_OS_X_VERSION_MIN_REQUIRED
+      std::cout << "- " << TOSTRING(MAC_OS_X_VERSION_MIN_REQUIRED) << " : " << MAC_OS_X_VERSION_MIN_REQUIRED << std::endl;
+      #else
+      std::cout << "- " << TOSTRING(MAC_OS_X_VERSION_MIN_REQUIRED) << " : " << "(not defined)" << std::endl;
+      #endif
+
    }
 
 }
